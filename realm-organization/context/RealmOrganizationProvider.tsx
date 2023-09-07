@@ -3,15 +3,16 @@ import { RealmOrganizationsContext } from "./RealmOrganizations";
 import { useSetUserRealm, useUser, useUserRealm } from "@llampukaq/realm";
 import { customAlphabet, nanoid } from "nanoid";
 import { useCache } from "react-cache-state";
-import { Organization } from "../types";
-import { formatOrganization } from "../services";
 
-function RealmOrganizationsProvider({ children }: PropsWithChildren<{}>) {
+import { formatOrganization } from "../services";
+import { OrganizationGeneric } from "..";
+
+function RealmOrganizationsProvider<T>({ children }: PropsWithChildren<{}>) {
   const { userRealm } = useUserRealm();
   const { setUser } = useSetUserRealm();
   const { user } = useUser();
   const [organization, setOrganization] =
-    useCache<Organization>("organization");
+    useCache<OrganizationGeneric>("organization");
   const customId = customAlphabet("1234567890abcdefghijklmnopqrstuvbzx", 15);
   const acc = (id?: string) => ({
     bId: organization?.organizationId,
@@ -38,7 +39,7 @@ function RealmOrganizationsProvider({ children }: PropsWithChildren<{}>) {
     setUser(res.user);
   };
 
-  const getOrganization = async () => {
+  const getOrganization = async (userRealm: any, user: any) => {
     if (user.organizations) {
       const res = await userRealm?.functions.organizationOrganizations(
         "get",

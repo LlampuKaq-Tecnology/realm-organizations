@@ -1,5 +1,5 @@
 import { useContext } from "react";
 import { RealmOrganizationsContext } from "../context/RealmOrganizations";
-export const useOrganization = () => {
+export function useOrganization() {
     return useContext(RealmOrganizationsContext);
-};
+}

@@ -1,4 +1,5 @@
-export declare const useOrganization: () => {
+export declare function useOrganization<T>(): {
+    organization: T | undefined;
     getOrganization: (userRealm: any, user: {
         userId: string;
         organizations: {

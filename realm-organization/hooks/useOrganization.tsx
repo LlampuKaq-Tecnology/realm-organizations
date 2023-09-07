@@ -1,8 +1,9 @@
 import { useContext } from "react";
 import { RealmOrganizationsContext } from "../context/RealmOrganizations";
 
-export const useOrganization = () => {
+export function useOrganization<T>() {
   return useContext(RealmOrganizationsContext) as {
+    organization: T | undefined;
     getOrganization: (
       userRealm: any,
       user: {
@@ -20,4 +21,4 @@ export const useOrganization = () => {
     addPanelOrganization: (data: any) => Promise<void>;
     deletePanelOrganization: (panel: string) => Promise<void>;
   };
-};
+}

@@ -33,7 +33,7 @@ function RealmOrganizationsProvider({ children }) {
         setOrganization(res.organization);
         setUser(res.user);
     });
-    const getOrganization = () => __awaiter(this, void 0, void 0, function* () {
+    const getOrganization = (userRealm, user) => __awaiter(this, void 0, void 0, function* () {
         if (user.organizations) {
             const res = yield (userRealm === null || userRealm === void 0 ? void 0 : userRealm.functions.organizationOrganizations("get", {
                 bId: user.organizations[0].organizationId,
