@@ -8,10 +8,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import { jsx as _jsx } from "react/jsx-runtime";
-import { useMemo } from "react";
 import { RealmOrganizationsContext } from "./RealmOrganizations";
-import { useSetUserRealm, useUser, useUserRealm } from "@llampukaq/realm";
-import { customAlphabet, nanoid } from "nanoid";
+import { useSetUserRealm, useUser, useUserRealm, } from "@llampukaq/realm";
+import { customAlphabet } from "nanoid";
 import { useCache } from "react-cache-state";
 import { formatOrganization } from "../services";
 function RealmOrganizationsProvider({ children }) {
@@ -26,43 +25,51 @@ function RealmOrganizationsProvider({ children }) {
         id,
     });
     const createOrganization = (name, moreData) => __awaiter(this, void 0, void 0, function* () {
-        const data = Object.assign({ created: new Date(), organizationId: nanoid(10), name: name, members: [{ role: "admin", userId: user.userId }], project_name: `${formatOrganization(name)}${customId()}` }, moreData);
+        const data = Object.assign({ created: new Date(), organizationId: customId(), name, members: [{ role: "admin", userId: user.userId }], project_name: `${formatOrganization(name)}${customId()}` }, moreData);
         const res = yield (userRealm === null || userRealm === void 0 ? void 0 : userRealm.functions.organizationOrganizations("create", {
             uId: user.userId,
         }, data));
-        setOrganization(res.organization);
-        setUser(res.user);
+        if (res != undefined) {
+            setOrganization(res.organization);
+            setUser(res.user);
+        }
     });
     const getOrganization = (userRealm, user) => __awaiter(this, void 0, void 0, function* () {
-        if (user.organizations) {
+        if (user.organizations != undefined) {
             const res = yield (userRealm === null || userRealm === void 0 ? void 0 : userRealm.functions.organizationOrganizations("get", {
                 bId: user.organizations[0].organizationId,
                 uId: user.userId,
             }, false));
-            setOrganization(res);
+            if (res != undefined)
+                setOrganization(res);
         }
     });
     const updateOrganization = (data) => __awaiter(this, void 0, void 0, function* () {
-        setOrganization(yield (userRealm === null || userRealm === void 0 ? void 0 : userRealm.functions.organizationOrganizations("update", acc(organization === null || organization === void 0 ? void 0 : organization.organizationId), data)));
+        const res = yield (userRealm === null || userRealm === void 0 ? void 0 : userRealm.functions.organizationOrganizations("update", acc(organization === null || organization === void 0 ? void 0 : organization.organizationId), data));
+        if (res != undefined)
+            setOrganization(res);
     });
     const addMemberOrganization = (id) => __awaiter(this, void 0, void 0, function* () {
         const res = yield (userRealm === null || userRealm === void 0 ? void 0 : userRealm.functions.organizationOrganizations("addMember", acc(id), { user: id }));
-        if (res.organization)
+        if (res != undefined)
             setOrganization(res.organization);
     });
     const deleteMemberOrganization = (id) => __awaiter(this, void 0, void 0, function* () {
         const res = yield (userRealm === null || userRealm === void 0 ? void 0 : userRealm.functions.organizationOrganizations("deleteMember", acc(id), { user: id }));
-        if (res.organization)
+        if (res != undefined)
             setOrganization(res.organization);
     });
     const addPanelOrganization = (data) => __awaiter(this, void 0, void 0, function* () {
-        setOrganization(yield (userRealm === null || userRealm === void 0 ? void 0 : userRealm.functions.organizationOrganizations("addPanel", acc(organization === null || organization === void 0 ? void 0 : organization.organizationId), data)));
+        const res = yield (userRealm === null || userRealm === void 0 ? void 0 : userRealm.functions.organizationOrganizations("addPanel", acc(organization === null || organization === void 0 ? void 0 : organization.organizationId), data));
+        if (res != undefined)
+            setOrganization(res);
     });
     const deletePanelOrganization = (panel) => __awaiter(this, void 0, void 0, function* () {
-        const { res } = yield (userRealm === null || userRealm === void 0 ? void 0 : userRealm.functions.organizationOrganizations("deleteMember", acc(panel), false));
-        setOrganization(res);
+        const res = yield (userRealm === null || userRealm === void 0 ? void 0 : userRealm.functions.organizationOrganizations("deleteMember", acc(panel), false));
+        if (res != undefined)
+            setOrganization(res);
     });
-    const contextValue = useMemo(() => ({
+    const contextValue = {
         organization,
         createOrganization,
         getOrganization,
@@ -71,7 +78,7 @@ function RealmOrganizationsProvider({ children }) {
         addPanelOrganization,
         deleteMemberOrganization,
         deletePanelOrganization,
-    }), [organization]);
+    };
     return (_jsx(RealmOrganizationsContext.Provider, { value: contextValue, children: children }));
 }
 export default RealmOrganizationsProvider;

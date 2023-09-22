@@ -85,7 +85,7 @@ exports = async function (type, id, data) {
     const isA = await isAdmin();
     if (isA) {
       const organization = await organizationCollection.findOneAndUpdate(
-        { project_name: id.id },
+        { organizationId: id.bId },
         type === "addMember"
           ? { $push: { members: { userId: data.user, role: "user" } } }
           : { $pull: { members: { userId: data.user } } },
@@ -110,7 +110,7 @@ exports = async function (type, id, data) {
             }
       );
 
-      return { organization };
+      return organization;
     }
   }
 
