@@ -34,10 +34,10 @@ function RealmOrganizationsProvider({ children }) {
             setUser(res.user);
         }
     });
-    const getOrganization = (userRealm, user) => __awaiter(this, void 0, void 0, function* () {
-        if (user.organizations != undefined) {
+    const getOrganization = (id) => __awaiter(this, void 0, void 0, function* () {
+        if (id != undefined) {
             const res = yield (userRealm === null || userRealm === void 0 ? void 0 : userRealm.functions.organizationOrganizations("get", {
-                bId: user.organizations[0].organizationId,
+                bId: id,
                 uId: user.userId,
             }, false));
             if (res != undefined)

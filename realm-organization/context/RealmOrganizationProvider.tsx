@@ -47,17 +47,16 @@ function RealmOrganizationsProvider({ children }: PropsWithChildren<{}>) {
     }
   };
 
-  const getOrganization = async (userRealm: any, user: any) => {
-    if (user.organizations != undefined) {
+  const getOrganization = async (id: string) => {
+    if (id != undefined) {
       const res = await userRealm?.functions.organizationOrganizations(
         "get",
         {
-          bId: user.organizations[0].organizationId,
+          bId: id,
           uId: user.userId,
         },
         false
       );
-
       if (res != undefined) setOrganization(res);
     }
   };
