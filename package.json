@@ -1,6 +1,6 @@
 {
   "name": "@llampukaq/realm-organizations",
-  "version": "0.1.3",
+  "version": "0.1.33",
   "main": "dist/realm-organization/index.js",
   "typings": "dist/realm-organization/index.d.ts",
   "publishConfig": {

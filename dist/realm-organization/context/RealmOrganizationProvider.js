@@ -32,6 +32,7 @@ function RealmOrganizationsProvider({ children }) {
         if (res != undefined) {
             setOrganization(res.organization);
             setUser(res.user);
+            return res.organization;
         }
     });
     const getOrganization = (id) => __awaiter(this, void 0, void 0, function* () {

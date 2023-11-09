@@ -5,7 +5,7 @@ export function useOrganization<T>() {
   return useContext(RealmOrganizationsContext) as {
     organization: T | undefined;
     getOrganization: (id: string) => Promise<void>;
-    createOrganization: (name: string, moreData?: object) => Promise<void>;
+    createOrganization: (name: string, moreData?: object) => Promise<T>;
     updateOrganization: (data: object) => Promise<void>;
     addMemberOrganization: (id: string) => Promise<void>;
     deleteMemberOrganization: (id: string) => Promise<void>;
