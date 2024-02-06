@@ -11,13 +11,14 @@ import { useCache } from "react-cache-state";
 
 import { formatOrganization } from "../services";
 import { OrganizationGeneric } from "..";
+import { useLocalStorage } from "@uidotdev/usehooks";
 
 function RealmOrganizationsProvider({ children }: PropsWithChildren<{}>) {
   const { userRealm } = useUserRealm();
   const { setUser } = useSetUserRealm();
   const { user } = useUser<UserDataRealm>();
   const [organization, setOrganization] =
-    useCache<OrganizationGeneric>("organization");
+    useLocalStorage<OrganizationGeneric>("organization");
   const customId = customAlphabet("1234567890abcdefghijklmnopqrstuvbzx", 15);
   const acc = (id?: string) => ({
     bId: organization?.organizationId,

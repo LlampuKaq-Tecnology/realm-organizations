@@ -1,6 +1,6 @@
 {
   "name": "@llampukaq/realm-organizations",
-  "version": "0.1.33",
+  "version": "0.1.34",
   "main": "dist/realm-organization/index.js",
   "typings": "dist/realm-organization/index.d.ts",
   "publishConfig": {
@@ -13,11 +13,12 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@llampukaq/realm": "^0.2.7",
+    "@llampukaq/realm": "^0.2.72",
     "@llampukaq/realm-google-provider": "^0.1.6",
     "@types/node": "20.5.9",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
+    "@uidotdev/usehooks": "^2.4.1",
     "autoprefixer": "10.4.15",
     "cllk": "^1.9.7",
     "nanoid": "^4.0.2",

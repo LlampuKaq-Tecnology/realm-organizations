@@ -11,13 +11,13 @@ import { jsx as _jsx } from "react/jsx-runtime";
 import { RealmOrganizationsContext } from "./RealmOrganizations";
 import { useSetUserRealm, useUser, useUserRealm, } from "@llampukaq/realm";
 import { customAlphabet } from "nanoid";
-import { useCache } from "react-cache-state";
 import { formatOrganization } from "../services";
+import { useLocalStorage } from "@uidotdev/usehooks";
 function RealmOrganizationsProvider({ children }) {
     const { userRealm } = useUserRealm();
     const { setUser } = useSetUserRealm();
     const { user } = useUser();
-    const [organization, setOrganization] = useCache("organization");
+    const [organization, setOrganization] = useLocalStorage("organization");
     const customId = customAlphabet("1234567890abcdefghijklmnopqrstuvbzx", 15);
     const acc = (id) => ({
         bId: organization === null || organization === void 0 ? void 0 : organization.organizationId,
