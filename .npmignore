@@ -14,3 +14,4 @@ next.config.js
 bun.lockb
 h.js
 styles
+./dist

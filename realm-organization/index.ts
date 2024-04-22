@@ -7,7 +7,7 @@ interface OrganizationData {
   created: Date;
   organizationId: string;
   name: string;
-  members: [{ role: "admin" | "user"; userId: string }];
+  members: { role: "admin" | "user"; userId: string }[];
   project_name: string;
 }
 export type OrganizationGeneric<T = {}> = OrganizationData & T;
