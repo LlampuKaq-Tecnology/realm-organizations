@@ -110,6 +110,7 @@ function RealmOrganizationsProvider({
       setOrganization(res.organization);
       //@ts-ignore
       setUser(res.user);
+      return res.organization;
     }
   };
 
